@@ -1,0 +1,91 @@
+version: '3'
+
+services:
+  next_data:
+    image: 'postgres:latest'
+    container_name: next_data
+    volumes:
+      - type: volume
+        source: db_volume
+        target: /var/lib/postgresql/data
+      - type: bind
+        source: ./next_data/scripts
+        target: /docker-entrypoint-initdb.d
+
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+    networks:
+      - next_app_network
+    ports:
+      - '5432:5432'
+    restart: always
+
+  next_db_management:
+    image: dpage/pgadmin4:latest
+
+    depends_on:
+      - next_data
+
+    networks:
+      - next_app_network
+
+    ports:
+      - '8080:80'
+
+    restart: always
+
+    volumes:
+      - type: bind
+        source: ./pgadmin4/servers.json
+        target: /pgadmin4/servers.json
+
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@example.com
+      - PGADMIN_DEFAULT_PASSWORD=postgres
+
+  next_app:
+    container_name: next_app
+    user: node
+
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+
+    environment:
+      - NODE_ENV=development
+
+    volumes:
+      - type: volume
+        source: src
+        target: /workspace/next_app
+
+      - type: volume
+        source: node_modules
+        target: /workspace/next_app/node_modules
+
+    restart: always
+
+    ports:
+      - '3000:3000'
+
+    networks:
+      - next_app_network
+
+    depends_on:
+      - next_data
+
+volumes:
+  node_modules:
+    name: next_app_node_modules
+
+  src:
+    name: next_app_src
+
+  db_volume:
+    name: next_app_db_volume
+
+networks:
+  next_app_network:
+    driver: bridge

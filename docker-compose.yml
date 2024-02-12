@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  next_app:
+    container_name: next_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - '3000:3000'
+    networks:
+      - next_app_network
+
+networks:
+  next_app_network:
+    driver: bridge

@@ -1,0 +1,18 @@
+FROM node:20-bookworm-slim
+
+WORKDIR /workspace/next_app
+
+RUN set -x && \
+  mkdir -p /workspace/next_app/node_modules && \
+  chown -R node:node /workspace/next_app/node_modules
+
+COPY --chown=node:node . ../
+
+USER node
+
+RUN yarn
+
+ARG NEXT_TELEMETRY_DISABLED=1
+ENV NEXT_TELEMETRY_DISABLED=$NEXT_TELEMETRY_DISABLED
+
+CMD ["yarn", "dev"]

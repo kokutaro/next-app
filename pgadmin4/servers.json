@@ -1,0 +1,14 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "Next Data",
+      "Group": "Servers",
+      "Port": 5432,
+      "Username": "postgres",
+      "Password": "password",
+      "Host": "next_data",
+      "SSLMode": "prefer",
+      "MaintenanceDB": "postgres"
+    }
+  }
+}
