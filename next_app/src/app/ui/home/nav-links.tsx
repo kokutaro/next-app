@@ -1,6 +1,10 @@
 'use client';
 
-import { CurrencyYenIcon, HomeIcon } from '@heroicons/react/24/outline';
+import {
+  Cog6ToothIcon,
+  CurrencyYenIcon,
+  HomeIcon,
+} from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -12,7 +16,7 @@ const links = [
     href: '/home/expences',
     icon: CurrencyYenIcon,
   },
-  { name: 'Fare Types', href: '/home/faretypes', icon: CurrencyYenIcon },
+  { name: 'Fare Types', href: '/home/faretypes', icon: Cog6ToothIcon },
 ];
 export default function NavLinks() {
   const pathname = usePathname();

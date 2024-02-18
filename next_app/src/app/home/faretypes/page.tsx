@@ -1,10 +1,14 @@
 import PageTitle from '@/app/ui/common/page-title';
+import { CreateFareType } from '@/app/ui/home/buttons';
 import Table from '@/app/ui/home/faretypes/faretype-table';
 import { Suspense } from 'react';
 export default async function Page() {
   return (
     <main>
       <PageTitle>Fare Types</PageTitle>
+      <div className="my-2 flex items-center justify-between gap-2">
+        <CreateFareType />
+      </div>
       <Suspense fallback={<FareTypesTableSkeleton />}>
         <Table />
       </Suspense>

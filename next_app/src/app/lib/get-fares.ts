@@ -43,5 +43,8 @@ export async function getFareTypes() {
 
   const fareTypes = await client.fare_type.findMany();
 
-  return fareTypes;
+  return fareTypes.map((f) => ({
+    ...f,
+    fare: Number(f.fare),
+  }));
 }

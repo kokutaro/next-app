@@ -32,7 +32,7 @@ export default async function Table() {
               <TableCell>{f.from}</TableCell>
               <TableCell>{f.to}</TableCell>
               <TableCell>
-                {f.fare.toNumber().toLocaleString('ja-JP', {
+                {f.fare.toLocaleString('ja-JP', {
                   style: 'currency',
                   currency: 'JPY',
                 })}
@@ -58,7 +58,7 @@ export default async function Table() {
             </div>
             <div className="flex flex-row items-center border-t pt-2 font-bold">
               <div className="grow">
-                {fare.fare.toNumber().toLocaleString('ja-JP', {
+                {fare.fare.toLocaleString('ja-JP', {
                   style: 'currency',
                   currency: 'JPY',
                 })}

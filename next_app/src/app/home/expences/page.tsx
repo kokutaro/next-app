@@ -1,5 +1,6 @@
 import { getFares } from '@/app/lib/get-fares';
 import PageTitle from '@/app/ui/common/page-title';
+import { CreateExpence } from '@/app/ui/home/buttons';
 
 export default async function Page() {
   const fares = await getFares();
@@ -7,6 +8,9 @@ export default async function Page() {
   return (
     <main>
       <PageTitle>Expences</PageTitle>
+      <div className="my-2 flex items-center justify-between gap-2">
+        <CreateExpence />
+      </div>
       <div className="grid gap-4 lg:grid-cols-2">
         {fares.map((fare) => (
           <div
